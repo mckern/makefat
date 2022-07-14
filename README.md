@@ -6,3 +6,11 @@ You give it some executables, it makes a fat executable from them. The fat execu
 ```
 makefat <output file> <input file 1> <input file 2> ...
 ```
+# extractfat
+A tool for extracting fat OSX binaries (a portable lipo)
+
+You give it some executable, it extracts the executables of any architecture in it.
+
+```
+extractfat <fat_file>
+```

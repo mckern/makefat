@@ -59,7 +59,7 @@ func main() {
 	}
 
 	// Build fat binary.
-	cmd = exec.Command("go", "run", "../makefat.go", fat, amd64, arm64)
+	cmd = exec.Command("go", "run", "../makefat/makefat.go", fat, amd64, arm64)
 	out, err = cmd.CombinedOutput()
 	if err != nil {
 		t.Fatalf("could not build fat target: %v\n%s\n", err, string(out))

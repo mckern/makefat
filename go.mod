@@ -1,3 +1,3 @@
-module github.com/randall77/makefat
+module github.com/batmac/makefat
 
 go 1.13
