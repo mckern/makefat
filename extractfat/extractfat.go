@@ -6,7 +6,6 @@ import (
 	"debug/macho"
 	"encoding/binary"
 	"fmt"
-	"io/ioutil"
 	"os"
 )
 
@@ -17,7 +16,7 @@ func main() {
 	}
 
 	file := os.Args[1]
-	data, err := ioutil.ReadFile(file)
+	data, err := os.ReadFile(file)
 	if err != nil {
 		panic(err)
 	}
@@ -45,7 +44,7 @@ func main() {
 		content := data[fah.Offset : fah.Offset+fah.Size]
 		fmt.Printf("writing %s\n", filename)
 		// #nosec
-		if err = ioutil.WriteFile(filename, content, 0o755); err != nil {
+		if err = os.WriteFile(filename, content, 0o755); err != nil {
 			panic(err)
 		}
 	}

@@ -6,7 +6,6 @@ import (
 	"debug/macho"
 	"encoding/binary"
 	"fmt"
-	"io/ioutil"
 	"os"
 )
 
@@ -35,7 +34,7 @@ func main() {
 	var inputs []input
 	offset := int64(align)
 	for _, i := range os.Args[2:] {
-		data, err := ioutil.ReadFile(i)
+		data, err := os.ReadFile(i)
 		if err != nil {
 			panic(err)
 		}

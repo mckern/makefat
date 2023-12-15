@@ -4,7 +4,6 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -18,7 +17,7 @@ func TestMakeFat(t *testing.T) {
 	}
 
 	// Make a directory to work in.
-	dir, err := ioutil.TempDir("", "makefat")
+	dir, err := os.MkdirTemp("", "makefat")
 	if err != nil {
 		t.Fatalf("could not create directory: %v", err)
 	}
@@ -35,7 +34,7 @@ func TestMakeFat(t *testing.T) {
 	if err != nil {
 		t.Fatalf("could not create source file: %v", err)
 	}
-	f.Write([]byte(`
+	_, _ = f.Write([]byte(`
 package main
 import "fmt"
 func main() {
@@ -84,13 +83,13 @@ func main() {
 	}
 
 	// Compare
-	amd64Data, _ := ioutil.ReadFile(amd64)
+	amd64Data, _ := os.ReadFile(amd64)
 	amd64Sum := sha256.Sum256(amd64Data)
-	arm64Data, _ := ioutil.ReadFile(arm64)
+	arm64Data, _ := os.ReadFile(arm64)
 	arm64Sum := sha256.Sum256(arm64Data)
-	amd64EData, _ := ioutil.ReadFile(fat + ".CpuAmd64")
+	amd64EData, _ := os.ReadFile(fat + ".CpuAmd64")
 	amd64ESum := sha256.Sum256(amd64EData)
-	arm64EData, _ := ioutil.ReadFile(fat + ".CpuArm64")
+	arm64EData, _ := os.ReadFile(fat + ".CpuArm64")
 	arm64ESum := sha256.Sum256(arm64EData)
 	if amd64Sum != amd64ESum || arm64Sum != arm64ESum {
 		fmt.Printf("%s %s\n", hex.EncodeToString(amd64Sum[:]), amd64)
