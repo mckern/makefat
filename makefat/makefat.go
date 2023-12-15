@@ -60,7 +60,7 @@ func main() {
 		// fat64 doesn't seem to work:
 		//   - the resulting binary won't run.
 		//   - the resulting binary is parseable by lipo, but reports that the contained files are "hidden".
-		//   - the native OSX lipo can't make a fat64.
+		//   - the native macOS lipo can't make a fat64.
 		panic("files too large to fit into a fat binary")
 	}
 
